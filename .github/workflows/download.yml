@@ -1,0 +1,19 @@
+name: Download Docker Image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull and Save Docker Image
+        run: |
+          docker pull xiaochennote/ubuntu26-gnome-hdmi:fnnas_0.4
+          docker save -o ubuntu26-gnome-hdmi.tar xiaochennote/ubuntu26-gnome-hdmi:fnnas_0.4
+
+      - name: Upload Image Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ubuntu26-gnome-hdmi-tar
+          path: ubuntu26-gnome-hdmi.tar
